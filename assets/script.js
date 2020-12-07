@@ -49,7 +49,9 @@ $.fn.saveForm = function (formEL, blockKey, finalText) {
     console.log(blockText);
 
     // var textForm = $(this).
+    localStorage.setItem("block", JSON.stringify(blockText));
   });
+  $(formEL).text(localStorage.getItem("block"));
 };
 
 $("nine").on("click", $.fn.saveForm("#9am", 9));
@@ -67,23 +69,13 @@ $("#10am").val(storageBlocks[10]);
 // allows for entered event to be saved and stored
 // shows event even if page refreshed
 // use JavaScript Date to display current date in a div (#displayJsDate)
-var NowDate = new Date();
-var months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-var sDay = NowDate.getDate();
-var sMonth = NowDate.getMonth() + 1;
-var sYear = NowDate.getFullYear();
-var eDisplayDate = document.getElementById("displayJsDate");
-$("currentDay").innerHTML = sYear + "-" + sMonth + "-" + sDay;
+
+// console.log(moment());
+// var testDate = "";
+// moment(testDate).format("MM/DD/YYYY");
+// console.log(testDate);
+
+const time = moment();
+const date = time.format("dddd MMMM Mo YYYY");
+
+$("#currentDay").text(date);
