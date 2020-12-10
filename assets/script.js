@@ -23,59 +23,62 @@ if (localStorage.getItem("timeBlocks") === null) {
   localStorage.setItem("timeBlocks", JSON.stringify(timeBlocks));
 }
 const storageBlocks = JSON.parse(localStorage.getItem("timeBlocks"));
+
 console.log(storageBlocks);
 
-// allows for an event to be entered in a time block
-// saveEvent
-// $(".save").on("click", function () {
-//   var test = $("#test").val();
-//   $(storageBlocks[9]) === test;
-//   console.log(test);
-//   // console.log(test);
-//   storageBlocks[9] = test;
-//   var nineAm = storageBlocks[9];
-//   console.log(nineAm);
-
-// });
-// $(storageBlocks).each(function (x) {});
-$.fn.saveForm = function (formEL, blockKey, finalText) {
+// saves text in a form in a variable
+$.fn.saveForm = function (formEL, blockKey) {
   $(".save").on("click", function () {
     var formText = $(formEL).val();
 
     console.log(formText);
-    // console.log(test);
+
     storageBlocks[blockKey] = formText;
     var blockText = storageBlocks[blockKey];
     console.log(blockText);
 
-    // var textForm = $(this).
-    localStorage.setItem("block", JSON.stringify(blockText));
+    localStorage.setItem("timeBlocks", JSON.stringify(storageBlocks));
   });
-  $(formEL).text(localStorage.getItem("block"));
 };
+$.each(storageBlocks, function (key, value) {
+  console.log(key, value);
 
-$("nine").on("click", $.fn.saveForm("#9am", 9));
-$("#ten").on("click", $.fn.saveForm("#10am", 10));
-$("#eleven").on("click", $.fn.saveForm("#11am", 11));
-$("#twelve").on("click", $.fn.saveForm("#12pm", 12));
-$("#thirteen").on("click", $.fn.saveForm("#1pm", 13));
-$("#fourteen").on("click", $.fn.saveForm("#2pm", 14));
-$("#fifteen").on("click", $.fn.saveForm("#3pm", 15));
-$("#sixteen").on("click", $.fn.saveForm("#4pm", 16));
-$("#seventeen").on("click", $.fn.saveForm("#5pm", 17));
+  $("#" + key + "t").val(value);
+});
 
-$("#9am").val(storageBlocks[9]);
-$("#10am").val(storageBlocks[10]);
-// allows for entered event to be saved and stored
-// shows event even if page refreshed
-// use JavaScript Date to display current date in a div (#displayJsDate)
-
-// console.log(moment());
-// var testDate = "";
-// moment(testDate).format("MM/DD/YYYY");
-// console.log(testDate);
+// runs save form for each button
+$("#nine").on("click", $.fn.saveForm("#9t", 9));
+$("#ten").on("click", $.fn.saveForm("#10t", 10));
+$("#eleven").on("click", $.fn.saveForm("#11t", 11));
+$("#twelve").on("click", $.fn.saveForm("#12t", 12));
+$("#thirteen").on("click", $.fn.saveForm("#13t", 13));
+$("#fourteen").on("click", $.fn.saveForm("#14t", 14));
+$("#fifteen").on("click", $.fn.saveForm("#15t", 15));
+$("#sixteen").on("click", $.fn.saveForm("#16t", 16));
+$("#seventeen").on("click", $.fn.saveForm("#17t", 17));
 
 const time = moment();
 const date = time.format("dddd MMMM Mo YYYY");
+const hour = parseInt(time.format("H"));
 
 $("#currentDay").text(date);
+// check time compared to timeblock
+function changeColor() {
+  $.each(storageBlocks, function (key) {
+    const blockHour = parseInt(key);
+    console.log(key);
+
+    if (hour > blockHour) {
+      $("#" + blockHour).css("background-color", "red");
+    } else if (hour === blockHour) {
+      $("#" + blockHour).css("background-color", "LightGreen");
+    } else if (hour < blockHour) {
+      $("#" + blockHour).css("background-color", "lightBlue");
+      console.log(typeof hour, typeof blockHour);
+    }
+  });
+}
+
+changeColor();
+// reset button localstorage.clear()
+// textarea.clear when reset is pushed

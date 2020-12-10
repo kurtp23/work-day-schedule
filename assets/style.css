@@ -29,18 +29,22 @@ textarea {
 .time-block {
   text-align: center;
   border-radius: 15px;
-  background-color: lightblue;
+  background-color: gray;
   padding: 15px;
   border-color: white;
-  color: white;
 }
 #test {
   color: black;
 }
 .row {
-  background-color: lightblue;
+  background-color: lightgray;
 }
-
+.col-2 {
+  background-color: white;
+}
+textarea {
+  background-color: white;
+}
 .row {
   white-space: pre-wrap;
   height: 80px;
