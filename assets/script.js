@@ -1,12 +1,3 @@
-// diplayDay || timeBlocks || enterEvent || saveEvent ||
-
-// dipslayDay/time
-// displays what day it is
-
-// timeBlocks
-// check to see if time block is past present or current
-// color blocks based off past present or future
-
 // enterEvent
 const timeBlocks = {
   9: "",
@@ -58,7 +49,7 @@ $("#sixteen").on("click", $.fn.saveForm("#16t", 16));
 $("#seventeen").on("click", $.fn.saveForm("#17t", 17));
 
 const time = moment();
-const date = time.format("dddd MMMM Mo YYYY");
+const date = time.format("dddd MMMM Do YYYY");
 const hour = parseInt(time.format("H"));
 
 $("#currentDay").text(date);
@@ -80,5 +71,10 @@ function changeColor() {
 }
 
 changeColor();
+
+$("#clear").on("click", function () {
+  localStorage.clear();
+  location.reload();
+});
 // reset button localstorage.clear()
 // textarea.clear when reset is pushed
